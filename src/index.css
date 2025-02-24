@@ -1,0 +1,75 @@
+@import './tailwind.css';
+/* Global custom styles */
+:root {
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enforce the primary font */
+.font-special {
+  font-family: "Special Elite", cursive !important;
+}
+
+/* Enforce the secondary font */
+.font-arbutus {
+  font-family: "Arbutus Slab", serif !important;
+}
+
+/* Enforce the tertiary font */
+.font-cinzel {
+  font-family: "Cinzel", serif !important;
+}
+
+/* Steampunk gradient for headers */
+.steampunk-gradient {
+  background: linear-gradient(
+    90deg,
+    #B87333 0%,
+    #CD7F32 33%,
+    #D4AF37 66%,
+    #FFFFF0 100%
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+.logo.react {
+  animation: logo-spin 20s linear infinite;
+}
+.logo.react:hover {
+  animation-direction: reverse;
+}
+
+@keyframes logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
