@@ -1,0 +1,9 @@
+services:
+  web:
+    image: sample:latest
+    init: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
