@@ -1,26 +1,22 @@
-# FROM debian:20.18.3
-# FROM alarmz/centos6:20.18.3
-FROM alpine:3.20.18.3
-# FROM ultramcu/ubuntu4bbb:20.18.3
+FROM node:20-alpine3.19
 
-ENV NODE_VERSION 20.18.3
-# ENV YARN_VERSION 20.18.3
+# Install tini
+RUN apk add --no-cache tini
 
-EXPOSE 3000
+WORKDIR /app
 
-# Update the apk package list and install curl using apk, which is the package manager for Alpine Linux.
-# Using --no-cache helps to avoid caching the package index and keeps the image lean.
-RUN apk update && apk add --no-cache curl
-
-WORKDIR /usr/src/app
-# WORKDIR /node
-COPY package*.json package-lock.json* ./
-# COPY yarn.lock ./
-
-USER node
-RUN mkdir app && chown -R node:node .
+COPY package.json package-lock*.json ./
 RUN npm install && npm cache clean --force
+
 COPY . .
-# docker-compose exec  -u root #19 Running Non-Root in Docker
-ENTRYPOINT [ "executable" ]
-CMD ["node", " ./bin/www"]
+
+# Expose Vite's default port
+EXPOSE 5173
+# Expose Storybook's default port
+EXPOSE 6006
+
+# Use tini as entrypoint
+ENTRYPOINT ["/sbin/tini", "--"]
+
+# Default to development mode with host flag to expose on all interfaces
+CMD [ "npm", "run", "dev", "--", "--host", "0.0.0.0" ]

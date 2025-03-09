@@ -6,4 +6,16 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "5173:5173"
+      
+  storybook:
+    image: storybook:latest
+    init: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "6006:6006"
+    volumes:
+      - .:/app
+    command: sh -c "npm install -D @storybook/react @storybook/builder-vite && npx storybook init --yes && npm run storybook -- --host 0.0.0.0 --ci"
